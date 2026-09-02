@@ -14,7 +14,18 @@ $requiredText = @(
     'deviceDetail',
     'addDevice',
     'noticeSetting',
-    'renderDemo'
+    'renderDemo',
+    'data-page="datasources"',
+    'function datasources()',
+    'dataSources',
+    'testDataSource',
+    'saveDataSource',
+    'dsFieldRender',
+    'dsSchema',
+    'Modbus TCP',
+    'VISA',
+    '第三方驱动 DLL',
+    'dsNameOf'
 )
 foreach ($text in $requiredText) {
     if ($content -notlike "*$text*") { throw "Demo is missing interaction: $text" }
