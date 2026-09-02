@@ -1,0 +1,16 @@
+{
+  "name": "ezdaq-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Playwright UI regression selftest for the EzDAQ EPS interactive demo",
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "test:edge": "playwright test --project=msedge",
+    "test:chrome": "playwright test --project=chrome",
+    "report": "playwright show-report"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.62.1"
+  }
+}

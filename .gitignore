@@ -1,3 +1,10 @@
 # Backup of the previous (Codex-owned) git repository metadata.
 # Kept on disk for rollback reference only; not part of the active repo.
 .git.codex-backup/
+
+# Playwright e2e selftest — local install artifacts (kept out of version control)
+e2e/node_modules/
+e2e/.browsers/
+e2e/test-results/
+e2e/playwright-report/
+e2e/blob-report/
