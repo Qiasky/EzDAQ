@@ -13,7 +13,10 @@ $requiredText = @(
     'MQTT',
     'Modbus TCP',
     'WebSocket',
-    'Go'
+    'Go',
+    '数据源',
+    'VISA',
+    '驱动 DLL'
 )
 
 foreach ($text in $requiredText) {

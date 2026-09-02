@@ -3,7 +3,7 @@
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $mvpPath = Join-Path $repositoryRoot 'EzDAQ EPS.md'
 $content = Get-Content -LiteralPath $mvpPath -Raw -Encoding utf8
-$requiredText = @('MVP', 'TCP/IP', 'Modbus TCP', 'Webhook', 'Git commit')
+$requiredText = @('MVP', 'TCP/IP', 'Modbus TCP', 'Webhook', 'Git commit', '数据源')
 foreach ($text in $requiredText) {
     if ($content -notlike "*$text*") { throw "Missing required MVP content: $text" }
 }
@@ -14,7 +14,7 @@ $designFile = Get-ChildItem -LiteralPath $repositoryRoot -File -Filter '*.md' |
 if ($null -eq $designFile) { throw 'Product design document was not found.' }
 
 $designContent = Get-Content -LiteralPath $designFile.FullName -Raw -Encoding utf8
-$requiredDesignText = @('MVP', 'TCP/IP', 'Modbus TCP', 'Webhook', 'UPS', 'HTTPS')
+$requiredDesignText = @('MVP', 'TCP/IP', 'Modbus TCP', 'Webhook', 'UPS', 'HTTPS', '数据源', 'VISA', '驱动 DLL', 'Modbus TCP')
 foreach ($text in $requiredDesignText) {
     if ($designContent -notlike "*$text*") { throw "Missing required product design content: $text" }
 }
