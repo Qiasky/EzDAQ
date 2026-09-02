@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$version = '0.1.0'
+$version = '0.1.1'
 $releaseRoot = Join-Path $repositoryRoot "release\EzDAQ-EPS-MVP-$version"
 $archivePath = Join-Path $repositoryRoot "release\EzDAQ-EPS-MVP-$version.zip"
 

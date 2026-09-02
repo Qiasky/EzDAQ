@@ -1,4 +1,4 @@
-# EzDAQ EPS MVP 0.1.0 Release
+# EzDAQ EPS MVP 0.1.1 Release
 
 这是首个可运行、可迁移的 MVP 平台基线，包含中心 HTTP 服务、浏览器控制台、模拟设备采集、告警确认/关闭和本地持久化。
 
@@ -11,7 +11,7 @@ cd apps/center-platform
 npm start
 ```
 
-打开 `http://localhost:8080`。
+打开 `http://localhost:8080`。不要直接双击 `apps/center-platform/public/index.html`：该文件需要通过中心服务提供 API、样式和脚本。
 
 ## Docker 部署
 

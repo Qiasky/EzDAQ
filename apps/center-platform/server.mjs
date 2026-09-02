@@ -49,7 +49,7 @@ async function serveStatic(res, pathname) {
 async function handler(req, res) {
   try {
     const url = new URL(req.url, `http://${req.headers.host}`); const { pathname } = url;
-    if (req.method === 'GET' && pathname === '/api/health') return json(res, 200, { status: 'ok', version: '0.1.0', updatedAt: state.updatedAt });
+    if (req.method === 'GET' && pathname === '/api/health') return json(res, 200, { status: 'ok', version: '0.1.1', updatedAt: state.updatedAt });
     if (req.method === 'GET' && pathname === '/api/dashboard') return json(res, 200, dashboard());
     if (req.method === 'GET' && pathname === '/api/devices') return json(res, 200, { items: state.devices });
     if (req.method === 'GET' && pathname === '/api/alerts') return json(res, 200, { items: state.alerts });
@@ -81,4 +81,4 @@ async function handler(req, res) {
 }
 
 export async function createServer() { await load(); return http.createServer(handler); }
-if (process.argv[1] === fileURLToPath(import.meta.url)) { const server = await createServer(); server.listen(port, () => console.log(`EzDAQ EPS MVP 0.1.0: http://localhost:${port}`)); }
+if (process.argv[1] === fileURLToPath(import.meta.url)) { const server = await createServer(); server.listen(port, () => console.log(`EzDAQ EPS MVP 0.1.1: http://localhost:${port}`)); }
