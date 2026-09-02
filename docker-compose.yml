@@ -1,0 +1,12 @@
+services:
+  ezdaq-center:
+    build:
+      context: ./apps/center-platform
+    image: ezdaq/center-platform:0.1.0
+    ports:
+      - "8080:8080"
+    volumes:
+      - ezdaq-data:/var/lib/ezdaq
+    restart: unless-stopped
+volumes:
+  ezdaq-data:

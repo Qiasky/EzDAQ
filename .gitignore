@@ -8,3 +8,7 @@ e2e/.browsers/
 e2e/test-results/
 e2e/playwright-report/
 e2e/blob-report/
+
+# Runtime state and distributable release archives.
+apps/center-platform/data/
+release/
