@@ -1,0 +1,3 @@
+# Backup of the previous (Codex-owned) git repository metadata.
+# Kept on disk for rollback reference only; not part of the active repo.
+.git.codex-backup/
