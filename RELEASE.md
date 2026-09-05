@@ -11,7 +11,7 @@ cd apps/center-platform
 npm start
 ```
 
-打开 `http://localhost:8080`。不要直接双击 `apps/center-platform/public/index.html`：该文件需要通过中心服务提供 API、样式和脚本。
+打开 `http://localhost:18080`。不要直接双击 `apps/center-platform/public/index.html`：该文件需要通过中心服务提供 API、样式和脚本。
 
 ## Docker 部署
 

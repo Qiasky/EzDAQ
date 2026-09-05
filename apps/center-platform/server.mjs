@@ -8,7 +8,8 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(root, 'public');
 const dataDir = process.env.EZDAQ_DATA_DIR || path.join(root, 'data');
 const statePath = path.join(dataDir, 'state.json');
-const port = Number(process.env.PORT || 8080);
+// Avoid the common 8080 collision with local development tools and proxy services.
+const port = Number(process.env.PORT || 18080);
 
 const initialState = () => ({
   version: 1,

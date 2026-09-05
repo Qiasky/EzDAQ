@@ -4,7 +4,7 @@ services:
       context: ./apps/center-platform
     image: ezdaq/center-platform:0.1.1
     ports:
-      - "8080:8080"
+      - "18080:8080"
     volumes:
       - ezdaq-data:/var/lib/ezdaq
     restart: unless-stopped

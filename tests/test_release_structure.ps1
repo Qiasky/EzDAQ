@@ -9,6 +9,7 @@ $requiredFiles = @(
     'apps\center-platform\Dockerfile',
     'apps\center-platform\public\index.html',
     'apps\center-platform\test\server.test.mjs',
+    'apps\center-platform\start-local.ps1',
     'scripts\package-release.ps1'
 )
 
