@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  lhg8950:
+    image: python:3.13-slim-bookworm
+    container_name: ezdaq-lhg8950
+    restart: unless-stopped
+    init: true
+    working_dir: /app
+    command:
+      - python
+      - -u
+      - -B
+      - /app/lhg8950_gateway.py
+      - --config
+      - /config/lhg8950.config.local.json
+      - --watch
+    environment:
+      TZ: Asia/Shanghai
+      PYTHONIOENCODING: utf-8
+      PYTHONDONTWRITEBYTECODE: "1"
+    volumes:
+      - ./app:/app:ro
+      - ./config:/config:ro
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"

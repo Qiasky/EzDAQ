@@ -15,6 +15,7 @@ EzDAQ 是面向机房与现场设备的数据采集、状态监控和巡检项�
 | [XPort Windows 程序](apps/xport-tool/bin/XPort温湿度工具.exe) | 下载后直接运行，无需安装 Python |
 | [微信小程序](apps/wechat-miniprogram/README.md) | 开发者工具导入与功能说明 |
 | [微信部署手册](apps/wechat-miniprogram/部署手册.md) | 云函数、数据库、上报路由与手机预览 |
+| [群晖 NAS 采集部署](deploy/synology-lhg8950/README.md) | 用 Container Manager 接替电脑持续采集并上传微信云端 |
 | [交付记录](RELEASE.md) | 已验证功能及版本记录 |
 
 ## 当前组成
