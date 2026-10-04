@@ -63,7 +63,7 @@ config/
 4. 来源选择使用该目录现有的 `docker-compose.yml`；若界面要求上传文件，上传包内的这个文件。不要只粘贴 YAML 却漏掉 `app` 和 `config` 目录。
 5. 不启用 Web Station 门户。此程序没有网页服务，不配置端口映射。
 6. 首次建立时取消立即启动项目。先等待镜像下载完成，再停止电脑上的该设备采集程序或 LabVIEW / 桌面实时采集，然后启动 NAS 项目。
-7. 打开容器 `ezdaq-lhg8950` 的 **日志**，观察至少两轮采集结果。
+7. 点击左侧 **容器**，选中 `ezdaq-lhg8950`，打开 **详情 → 日志**，观察至少两轮采集结果。项目详情中的“容器”标签只显示列表；左侧总“日志”记录项目操作，两处都不能代替采集程序的输出。
 
 电脑上的后台进程信息记录在 `apps/wechat-miniprogram/.local/lantronix/gateway-process.local.json`。停止时核对实际进程命令行，再停止对应 `lhg8950_gateway.py --watch` 进程，不能使用旧进程编号、不能关闭所有 Python 程序。
 
@@ -102,6 +102,35 @@ sudo docker compose stop
 
 旧版套件只有 `docker-compose` 命令时，以它替换 `docker compose`，或直接使用 DSM 的项目界面。
 
+### 容器运行中，但 DSM 提示“无可用日志”
+
+先在手机小程序刷新 `HOME-TH-001`，检查上报时间是否持续更新。驱动在进入采集循环前立即输出启动参数，失败也会输出错误；因此不能仅凭 DSM 页面空白判断采集失败。本部署显式使用 `json-file` 日志驱动，需用 `docker logs` 核对实际输出，判断是不是界面读取日志的问题。
+
+已启用 SSH 时，运行上面的 `docker logs` 命令即可。未启用 SSH 时，可在 **控制面板 → 任务计划 → 新增 → 计划的任务 → 用户定义的脚本** 建立一次性检查任务：
+
+1. 名称填写 `EzDAQ Check Logs`，用户选择 `root`，取消“已启用”，仅手动运行。
+2. 在 **任务设置 → 用户定义的脚本** 粘贴以下内容。目录以实际项目路径为准。
+3. 保存后选中该任务，点 **运行**。在 File Station 的项目目录下载 `collector-check.log` 查看，检查完成后可删除这个任务。
+
+```sh
+docker_cli=/var/packages/ContainerManager/target/usr/bin/docker
+if [ ! -x "$docker_cli" ]; then
+    docker_cli=$(command -v docker)
+fi
+if [ -z "$docker_cli" ]; then
+    echo '找不到 Docker 命令，请核对 Container Manager 是否已安装。'
+    exit 1
+fi
+{
+    "$docker_cli" inspect --type container --format 'status={{.State.Status}} running={{.State.Running}} restarts={{.RestartCount}} logging={{.HostConfig.LogConfig.Type}} command={{json .Config.Cmd}}' ezdaq-lhg8950
+    "$docker_cli" logs --timestamps --tail 40 ezdaq-lhg8950
+} > /volume1/docker/ezdaq-lhg8950/collector-check.log 2>&1
+```
+
+该检查只读取容器状态和最新 40 行日志，保存到项目目录，不启动另一份采集程序。若日志有连续的“云端保存成功”且手机上报时间更新，即可确认采集链路；若有 TCP 或云端错误，按实际错误排查。
+
+参考：[群晖任务计划](https://kb.synology.com/en-global/DSM/help/DSM/AdminCenter/system_taskscheduler?version=7)、[Docker 容器日志命令](https://docs.docker.com/reference/cli/docker/container/logs/)。
+
 ## 6. 排查常见问题
 
 | 现象 | 处理 |
@@ -112,9 +141,14 @@ sudo docker compose stop
 | 尚未设置传感器 IP / 响应地址不一致 | 核对 `config/lhg8950.config.local.json` 是否来自当前 `.178` 设备 |
 | TCP 超时 / 连接拒绝 | 检查 `.178:10050`、网线和电源，并确保电脑 / LabVIEW 已停止读取同一模块 |
 | 配置文件权限错误 | 用 File Station 检查项目目录权限，确保容器可读取 `app` 和 `config` |
+| `Bind mount failed`，提示 `app` 不存在 | 先完整解压上传包，确认项目目录下面同时有 `app`、`config` 和 Compose 文件，再启动 |
+| `Found multiple config files` | 同一项目保留一个生效的 Compose 文件。Docker 优先读取 `compose.yaml`；确认内容正确后，把另一份改名为 `.bak`。此警告本身不能证明容器启动失败 |
+| 容器绿色运行，但“无可用日志” | 按上面的一次性检查任务读取实际 Docker 日志，同时核对手机上报时间 |
 | 云端拒绝签名 / 时间戳 | 设备编号与密钥须和现有台账一致；检查 NAS 自动校时与出站 HTTPS |
 | 手机设备离线 | 先看最新容器日志和上报时间，确认是否真的收到云端保存回执 |
 
-目前提供的是部署文件和可上传的迁移包；NAS 容器启动、真实上报与电脑关机后的独立运行，需要在实际 NAS 上完成验证。部署前不自动停止现有电脑采集进程。
+2026-10-05 已在 DS920+、DSM 7.2.2-72806 Update 9 上验证：NAS 地址为 `192.168.31.134`，项目目录为 `/volume1/docker/ezdaq-lhg8950`；容器连续运行，电脑端后台采集已停止，手机小程序刷新后仍显示设备在线、上报时间在一分钟以内，确认 NAS 已接管这台 `.178` 设备的采集与上报。DSM 容器日志页曾显示“无可用日志”，所以当前链路验证依据是容器运行状态、电脑端进程核对及手机新上报时间，没有据此声称取得了 Docker 日志回执。电脑物理关机、NAS 重启后的恢复尚未现场验证；日常使用需保持 NAS 开机。
+
+重新部署或迁移另一台设备时，仍须核对设备身份、响应地址与密钥，再按前面的切换与验收步骤操作。
 
 参考：[群晖 Container Manager 套件与支持型号](https://www.synology.com/en-global/dsm/packages/ContainerManager)、[群晖项目操作说明](https://kb.synology.com/en-global/DSM/help/ContainerManager/docker_project)、[Python 官方镜像清单](https://github.com/docker-library/official-images/blob/master/library/python)。
