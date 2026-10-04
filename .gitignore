@@ -12,3 +12,18 @@ e2e/blob-report/
 # Runtime state and distributable release archives.
 apps/center-platform/data/
 release/
+
+# Device gateway configuration contains private per-device credentials.
+apps/wechat-miniprogram/.local/
+apps/wechat-miniprogram/scripts/*.local.json
+apps/wechat-miniprogram/scripts/__pycache__/
+apps/wechat-miniprogram/test/__pycache__/
+apps/wechat-miniprogram/project.private.config.json
+
+# XPort desktop tool build environment and Python cache.
+apps/xport-tool/.build/
+apps/xport-tool/__pycache__/
+apps/xport-tool/tests/__pycache__/
+
+# Official third-party discovery executable is fetched and verified by find_xport.py.
+Hardware/XPORT/dsearch.exe

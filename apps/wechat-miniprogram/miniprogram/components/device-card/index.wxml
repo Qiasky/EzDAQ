@@ -1,0 +1,24 @@
+<!-- components/device-card/index.wxml -->
+<view class="card device-card st-border-{{ device.status }}" bindtap="onTap">
+  <view class="row-head">
+    <view class="row-left">
+      <status-dot status="{{ device.status }}" size="{{ 16 }}" pulse="{{ device.status === 'fault' }}" />
+      <text class="name">{{ device.name }}</text>
+      <text class="badge st-bg-{{ device.status }}">{{ statusText }}</text>
+    </view>
+    <text class="arrow">›</text>
+  </view>
+
+  <view class="row-meta">
+    <text class="text-hint">{{ typeText }} · {{ device.site || '未标注位置' }}</text>
+    <text class="text-hint {{ device.status === 'offline' ? 'text-danger' : '' }}">{{ lastReport }}</text>
+  </view>
+
+  <view wx:if="{{ metrics.length }}" class="row-metrics">
+    <view wx:for="{{ metrics }}" wx:key="key" class="metric">
+      <text class="metric-label">{{ item.label }}</text>
+      <text class="metric-value {{ item.over ? 'metric-over' : '' }}">{{ item.value }}</text>
+      <text class="metric-unit">{{ item.unit }}</text>
+    </view>
+  </view>
+</view>

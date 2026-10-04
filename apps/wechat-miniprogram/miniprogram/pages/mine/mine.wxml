@@ -1,0 +1,21 @@
+<view class="page">
+  <view class="row"><view><view class="eyebrow">MY WORKSPACE</view><view class="heading">我的工作台</view></view><view class="brand-mark mine-logo">E</view></view>
+  <view class="card profile"><view class="left"><view class="avatar">工</view><view><view class="profile-name">{{name}}</view><view class="small muted">设备巡检 · 现场值守</view></view></view><view class="profile-source row"><text class="small muted">当前数据来源</text><text class="source {{source.isDemo ? 'demo' : ''}}">{{source.label}}</text></view></view>
+  <view class="shortcuts"><view class="card shortcut" bindtap="onScan"><view class="shortcut-icon">⌗</view><view>扫码查看</view><view class="small muted">快速定位现场设备</view></view><view class="card shortcut" bindtap="onAlarm"><view class="shortcut-icon alarm-shortcut">♧</view><view>告警处置</view><view class="small muted">跟进异常与处理记录</view></view></view>
+  <view class="section-head section-title">工作设置</view>
+  <view class="card menu"><view class="row menu-row" bindtap="onConnection"><view class="left"><text class="menu-icon">⇄</text><view><view>数据连接</view><view class="small muted">{{source.label}} · 切换现场数据来源</view></view></view><text class="chevron">{{settingsOpen ? '⌄' : '›'}}</text></view>
+  <view wx:if="{{settingsOpen}}" class="connection-panel">
+    <view class="small muted connection-intro">选择数据来源，测试成功后保存。</view>
+    <view wx:for="{{modes}}" wx:key="key" class="mode-option {{mode === item.key ? 'selected' : ''}}" data-key="{{item.key}}" bindtap="onMode"><view class="row"><view><view class="mode-title">{{item.label}}</view><view class="small muted">{{item.desc}}</view></view><view class="radio {{mode === item.key ? 'checked' : ''}}"></view></view></view>
+    <view wx:if="{{mode === 'cloud'}}" class="connection-hint"><view>云环境已配置</view><view class="env-id">{{source.env}}</view><view class="small muted">首次使用需在开发者工具部署云函数，并初始化设备台账。</view></view>
+    <view wx:if="{{mode === 'ezdaq'}}"><view class="field-label">平台地址</view><input class="field" placeholder="https://你的平台域名" value="{{baseUrl}}" bindinput="onUrl" /><view class="field-label">访问令牌（可选，仅本次会话有效）</view><input class="field" password="{{true}}" placeholder="当前仓库 MVP 无需令牌" value="{{token}}" bindinput="onToken" /><view class="small muted field-hint">开发者工具本机可连接 127.0.0.1:18080；手机需使用可访问的 HTTPS 地址。</view></view>
+    <view wx:if="{{connectionError}}" class="error-banner">{{connectionError}}</view><view wx:if="{{connectionMessage}}" class="success-message">{{connectionMessage}}</view>
+    <view class="connection-actions"><button class="secondary" disabled="{{saving}}" bindtap="onTest">{{saving ? '连接中…' : '测试连接'}}</button><button class="primary" disabled="{{saving}}" bindtap="onSave">保存连接</button></view>
+  </view>
+  <view class="row menu-row" bindtap="onHelp"><view class="left"><text class="menu-icon">≡</text><view>使用说明</view></view><text class="chevron">{{helpOpen ? '⌄' : '›'}}</text></view>
+  <view wx:if="{{helpOpen}}" class="help-panel"><view>01 · 在总览按区域、状态或编号查找设备。</view><view>02 · 扫描设备二维码，直接打开设备详情。</view><view>03 · 在告警中心认领，完成后填写处理说明。</view><view>04 · 切换数据来源后返回总览，下拉刷新。</view><view class="small muted">演示模式无需 ID；云开发已沿用原项目配置。</view></view>
+  <view class="row menu-row" bindtap="onRefresh"><view class="left"><text class="menu-icon">↻</text><view>重置连接会话</view></view><text class="chevron">›</text></view>
+  <view wx:if="{{source.isDemo}}" class="row menu-row" bindtap="onResetDemo"><view class="left"><text class="menu-icon">◫</text><view>恢复演示数据</view></view><text class="chevron">›</text></view>
+  <view class="row menu-row" bindtap="onAbout"><view class="left"><text class="menu-icon">i</text><view>关于 EzDAQ</view></view><text class="small muted">0.2.0 <text class="chevron">›</text></text></view></view>
+  <view class="mine-footer"><view class="footer-brand">EzDAQ<text> EPS</text></view><view class="small muted">连接设备，守护现场</view></view>
+</view>

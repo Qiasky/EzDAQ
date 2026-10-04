@@ -1,0 +1,35 @@
+/* components/status-dot/index.wxss */
+.dot {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* 状态配色 —— 与 app.wxss 的变量对应 */
+.st-normal { background: #2a9d5c; }
+.st-warn { background: #e08a1e; }
+.st-fault { background: #d03b3b; }
+.st-offline { background: #9aa1ac; }
+.st-maintain { background: #4a7fb5; }
+
+/* 故障呼吸灯：运维一眼能扫到，不用逐条读文字 */
+.pulse {
+  animation: dot-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.15);
+  }
+}
+
+/* 无障碍：尊重系统减弱动效设置 */
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}

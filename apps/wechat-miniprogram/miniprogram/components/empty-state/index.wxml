@@ -1,0 +1,11 @@
+<!-- components/empty-state/index.wxml -->
+<view class="empty-wrap">
+  <!-- 纯 CSS 图形，不用图片，省体积也不依赖资源 -->
+  <view wx:if="{{ icon === 'search' }}" class="icon-search"></view>
+  <view wx:elif="{{ icon === 'error' }}" class="icon-error">!</view>
+  <view wx:else class="icon-empty"></view>
+
+  <text class="et-title">{{ title }}</text>
+  <text wx:if="{{ desc }}" class="et-desc">{{ desc }}</text>
+  <view wx:if="{{ actionText }}" class="et-btn" bindtap="onAction">{{ actionText }}</view>
+</view>

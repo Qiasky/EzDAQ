@@ -1,0 +1,56 @@
+page { background: #f5f7f9; color: #20323d; font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 26rpx; line-height: 1.5; }
+view, text, button, input { box-sizing: border-box; }
+button { margin: 0; padding: 0; font-size: 26rpx; font-weight: 600; line-height: 1.5; border-radius: 14rpx; }
+button::after { border: none; }
+button[disabled] { opacity: .5; }
+.page { padding: 28rpx 32rpx 44rpx; }
+.row { display: flex; align-items: center; justify-content: space-between; }
+.left { display: flex; align-items: center; }
+.grow { flex: 1; min-width: 0; }
+.muted { color: #83919b; }
+.small { font-size: 22rpx; }
+.eyebrow { font-size: 20rpx; font-weight: 600; letter-spacing: 3rpx; color: #93a2ac; }
+.heading { font-size: 40rpx; font-weight: 700; letter-spacing: -1rpx; }
+.section-title { font-size: 29rpx; font-weight: 650; }
+.section-head { margin: 34rpx 0 20rpx; }
+.brand-mark { background: #177c70; color: #fff; width: 58rpx; height: 58rpx; border-radius: 16rpx; font-size: 34rpx; font-weight: 800; text-align: center; line-height: 58rpx; margin-right: 16rpx; }
+.source { font-size: 20rpx; padding: 6rpx 15rpx; border-radius: 30rpx; background: #e5f3ef; color: #167567; white-space: nowrap; }
+.source.demo { background: #fff1d9; color: #9b701b; }
+.card { background: #fff; border: 1rpx solid #e8edf0; border-radius: 22rpx; }
+.badge { display: inline-block; font-size: 21rpx; line-height: 1.6; padding: 3rpx 14rpx; border-radius: 9rpx; white-space: nowrap; }
+.badge.normal, .badge.done { color: #188775; background: #e9f6f1; }
+.badge.warn, .badge.ack { color: #b1761e; background: #fff4e1; }
+.badge.fault, .badge.critical, .badge.pending { color: #c5574c; background: #fff0ed; }
+.badge.offline, .badge.ignore { color: #7b8792; background: #eef1f4; }
+.badge.info, .badge.maintain { color: #4b78ac; background: #edf3fc; }
+.dot { display: inline-block; width: 10rpx; height: 10rpx; border-radius: 50%; background: #20a583; margin-right: 9rpx; }
+.dot.fault { background: #dd6b5e; } .dot.warn { background: #dba042; } .dot.offline { background: #97a4ae; }
+.primary { background: #167d71; color: #fff; padding: 21rpx 28rpx; }
+.secondary { background: #eaf4f1; color: #16756a; padding: 18rpx 25rpx; }
+.plain { background: transparent; color: #187d71; padding: 8rpx 0; font-size: 23rpx; }
+.chevron { font-size: 34rpx; color: #99a5ae; margin-left: 14rpx; }
+.search { background: #fff; border: 1rpx solid #e6ecef; border-radius: 15rpx; padding: 18rpx 22rpx; display: flex; align-items: center; margin-top: 28rpx; }
+.search-symbol { width: 23rpx; height: 23rpx; border: 3rpx solid #93a1ac; border-radius: 50%; margin-right: 20rpx; position: relative; }
+.search-symbol::after { content: ''; position: absolute; width: 10rpx; height: 3rpx; background: #93a1ac; transform: rotate(45deg); bottom: -5rpx; right: -7rpx; }
+.search input { flex: 1; min-width: 0; height: 42rpx; font-size: 25rpx; }
+.filters { display: flex; justify-content: space-between; margin: 24rpx 0; border-bottom: 1rpx solid #e1e8ed; }
+.filter { color: #7e8d98; padding: 0 8rpx 20rpx; font-size: 24rpx; border-bottom: 4rpx solid transparent; }
+.filter.active { color: #177c70; font-weight: 650; border-bottom-color: #177c70; }
+.empty { text-align: center; padding: 70rpx 30rpx; }
+.empty-symbol { font-size: 62rpx; color: #b6c8c5; margin-bottom: 16rpx; }
+.empty-title { font-size: 28rpx; font-weight: 600; margin-bottom: 10rpx; }
+.empty .secondary { margin: 26rpx auto 0; max-width: 270rpx; }
+.error-banner { color: #a85243; padding: 20rpx 24rpx; background: #fff0eb; border: 1rpx solid #f0d4cb; border-radius: 14rpx; margin: 20rpx 0; font-size: 23rpx; }
+.skeleton { height: 205rpx; margin-bottom: 18rpx; padding: 30rpx; }
+.skeleton-line { height: 22rpx; border-radius: 8rpx; background: #eef2f4; width: 60%; margin: 12rpx 0 24rpx; }
+.skeleton-line.short { width: 35%; }
+.footer-note { text-align: center; color: #97a3ac; font-size: 21rpx; padding: 26rpx 0 6rpx; }
+.metric-value { font-size: 36rpx; font-weight: 650; letter-spacing: -1rpx; color: #213c46; }
+.metric-label { color: #83919b; font-size: 21rpx; }
+.metric-unit { color: #8a98a2; font-size: 20rpx; margin-left: 6rpx; }
+.device-name { font-size: 28rpx; font-weight: 650; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.device-icon { width: 68rpx; height: 68rpx; border-radius: 18rpx; background: #edf5f3; color: #277d72; display: flex; align-items: center; justify-content: center; font-size: 36rpx; margin-right: 20rpx; flex-shrink: 0; }
+.device-icon.power { background: #fef3e5; color: #b78237; }
+.device-icon.fan { background: #edf2f8; color: #6689a9; }
+.device-icon.sensor { background: #edf6f5; color: #268b81; }

@@ -1,0 +1,5 @@
+<!-- components/status-dot/index.wxml -->
+<view
+  class="dot st-{{ status }}{{ pulse && status === 'fault' ? ' pulse' : '' }}"
+  style="width: {{ size }}rpx; height: {{ size }}rpx;"
+></view>

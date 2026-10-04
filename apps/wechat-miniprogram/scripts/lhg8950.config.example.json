@@ -1,0 +1,17 @@
+{
+  "host": "",
+  "port": 10050,
+  "timeoutMs": 60000,
+  "waitMs": 10000,
+  "intervalMs": 35000,
+  "requestHex": "3A30 3030 3435 3030 3030 3030 3841 340D 0A",
+  "responseBytes": 27,
+  "responseAddress": null,
+  "temperatureOffset": 11,
+  "humidityOffset": 15,
+  "invalidHumidityValues": [],
+  "negativeMode": "unconfirmed",
+  "deviceId": "HOME-TH-001",
+  "secret": "",
+  "reportUrl": "https://cloud1-d3g4tp02la7e35e26-1500215617.ap-shanghai.app.tcloudbase.com/device-report"
+}

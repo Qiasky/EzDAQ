@@ -1,0 +1,22 @@
+<view class="page">
+  <view class="row"><view><view class="eyebrow">ALARM CENTER</view><view class="heading">告警中心</view></view><view class="source {{source.isDemo ? 'demo' : ''}}" bindtap="onSettings">{{source.label}} ›</view></view>
+  <view class="alarm-summary"><view><text class="summary-number">{{counts.pending}}</text><text class="summary-label">条待处理</text></view><view class="summary-right"><text class="dot warn"></text>{{counts.ack}} 条处理中</view></view>
+  <view class="small muted">发现异常，及时确认；现场处置，记录闭环。</view>
+  <view class="filters"><view wx:for="{{tabs}}" wx:key="key" class="filter {{status === item.key ? 'active' : ''}}" data-key="{{item.key}}" bindtap="onTab">{{item.label}}</view></view>
+  <view class="row alarm-list-heading"><text class="small muted">按发生时间排序</text><button class="plain" bindtap="onLevel">{{levelText}} ⌄</button></view>
+  <view wx:if="{{error}}" class="error-banner">{{error}}<button class="plain" bindtap="onRetry">重新加载 ›</button></view>
+  <view wx:if="{{loading}}"><view wx:for="{{[1,2]}}" wx:key="*this" class="card skeleton"><view class="skeleton-line"></view><view class="skeleton-line short"></view></view></view>
+  <view wx:elif="{{!list.length && !error}}" class="card empty"><view class="empty-symbol">✓</view><view class="empty-title">{{status === 'pending' ? '暂无待处理告警' : '暂无匹配记录'}}</view><view class="small muted">{{status === 'pending' ? '现场每一次平稳运行，都离不开你的守护' : '试试其他状态或级别'}}</view></view>
+  <view wx:for="{{list}}" wx:key="_id" class="card alarm-card level-{{item.level}}" data-id="{{item._id}}" bindtap="onExpand">
+    <view class="row"><view class="left"><text class="badge {{item.level}}">{{item.levelText}}</text><text class="alarm-device truncate">{{item.deviceName}}</text></view><text class="small muted">{{item.timeText}}</text></view>
+    <view class="alarm-message">{{item.message}}</view>
+    <view wx:if="{{item.valueText}}" class="alarm-reading"><text>当前值 <text class="reading-value">{{item.valueText}}</text></text><text wx:if="{{item.thresholdText}}">阈值 {{item.thresholdText}}</text></view>
+    <view wx:if="{{item.detail}}" class="small muted alarm-detail">{{item.detail}}</view>
+    <view wx:if="{{expanded === item._id}}" class="alarm-expanded"><view>设备编号：{{item.deviceId}}</view><view>发生时间：{{item.fullTime}}</view><view wx:if="{{item.handlerName}}">处理人员：{{item.handlerName}}</view><view wx:if="{{item.handledTime}}">处理时间：{{item.handledTime}}</view><button class="plain" data-id="{{item.deviceId}}" catchtap="onDevice">查看设备状态 ›</button></view>
+    <view wx:if="{{item.note}}" class="alarm-note">处理说明：{{item.note}}</view>
+    <view class="row alarm-actions"><text class="small muted"><text class="dot {{item.status === 'pending' ? 'fault' : item.status === 'ack' ? 'warn' : 'normal'}}"></text>{{item.statusText}}</text><view class="left"><button wx:if="{{item.status === 'pending'}}" class="secondary action-button" disabled="{{!!handling}}" data-id="{{item._id}}" data-action="ack" catchtap="onHandle">{{handling === item._id ? '处理中…' : '认领告警'}}</button><button wx:elif="{{item.status === 'ack'}}" class="primary action-button" disabled="{{!!handling}}" data-id="{{item._id}}" data-action="done" catchtap="onHandle">{{handling === item._id ? '提交中…' : '完成闭环'}}</button><text wx:else class="small muted">已归档</text></view></view>
+  </view>
+  <view wx:if="{{moreError}}" class="error-banner">{{moreError}}<button class="plain" bindtap="onMore">重试加载更多</button></view>
+  <button wx:elif="{{hasMore}}" class="plain load-more" bindtap="onMore">{{loadingMore ? '正在加载…' : '加载更多告警'}}</button>
+  <view wx:elif="{{list.length}}" class="footer-note">已显示全部告警记录</view>
+</view>

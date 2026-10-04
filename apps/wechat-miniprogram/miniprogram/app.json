@@ -1,0 +1,23 @@
+{
+  "pages": ["pages/index/index", "pages/alarm/alarm", "pages/device/device", "pages/mine/mine"],
+  "window": {
+    "navigationBarBackgroundColor": "#f5f7f9",
+    "navigationBarTitleText": "EzDAQ 设备巡检",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f7f9",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#87939e", "selectedColor": "#147d72", "backgroundColor": "#ffffff", "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "设备总览", "iconPath": "assets/overview.png", "selectedIconPath": "assets/overview-active.png" },
+      { "pagePath": "pages/alarm/alarm", "text": "告警中心", "iconPath": "assets/alarm.png", "selectedIconPath": "assets/alarm-active.png" },
+      { "pagePath": "pages/mine/mine", "text": "我的", "iconPath": "assets/mine.png", "selectedIconPath": "assets/mine-active.png" }
+    ]
+  },
+  "networkTimeout": { "request": 12000 },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

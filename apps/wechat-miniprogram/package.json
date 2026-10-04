@@ -1,0 +1,17 @@
+{
+  "name": "ezdaq-wechat-miniprogram",
+  "version": "0.2.2",
+  "private": true,
+  "description": "EzDAQ EPS native WeChat inspection client",
+  "scripts": {
+    "check": "node scripts/check.js",
+    "check:native": "node scripts/check-native.cjs",
+    "sync": "node scripts/sync-shared.js",
+    "test": "node --test test/*.test.cjs",
+    "test:gateway": "python -m unittest discover -s test -p test_*.py -v",
+    "discover:xport": "python scripts/find_xport.py",
+    "package": "python scripts/package_miniprogram.py",
+    "preview": "node scripts/preview.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

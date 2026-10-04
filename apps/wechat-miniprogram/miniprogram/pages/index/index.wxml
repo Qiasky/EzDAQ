@@ -1,0 +1,34 @@
+<view class="page">
+  <view class="row brand-header">
+    <view class="left"><view class="brand-mark">E</view><view><view class="brand-name">EzDAQ<text class="brand-sub"> EPS</text></view><view class="small muted">设备巡检 · 现场工作台</view></view></view>
+    <view class="source {{source.isDemo ? 'demo' : ''}}" bindtap="onSettings">{{source.label}} ›</view>
+  </view>
+  <view class="hero">
+    <view class="row"><text class="hero-label">现场运行概览</text><text class="hero-live"><text class="dot"></text>{{source.isDemo ? '演示现场' : '最新快照'}}</text></view>
+    <view class="hero-site">{{siteName || '正在读取现场数据'}}</view>
+    <view class="row hero-bottom"><view><text class="online-number">{{onlineRate}}</text><text class="online-unit">%</text><view class="hero-label">设备在线率</view></view><view class="hero-info"><view>设备状态，一目了然</view><view class="hero-label">更新于 {{updateText}}</view></view></view>
+    <view class="hero-decoration"></view>
+  </view>
+  <view class="kpi-grid">
+    <view class="card kpi"><text class="metric-label">设备总数</text><view class="kpi-value">{{summary.total}}<text class="kpi-unit">台</text></view><text class="kpi-desc">已接入现场</text></view>
+    <view class="card kpi"><text class="metric-label">异常设备</text><view class="kpi-value danger">{{summary.fault + summary.warn}}<text class="kpi-unit">台</text></view><text class="kpi-desc">需优先关注</text></view>
+    <view class="card kpi"><text class="metric-label">离线设备</text><view class="kpi-value muted">{{summary.offline}}<text class="kpi-unit">台</text></view><text class="kpi-desc">检查采集连接</text></view>
+  </view>
+  <view wx:if="{{alarmError}}" class="error-banner" bindtap="onAlarm">{{alarmError}} ›</view>
+  <view wx:elif="{{pendingCount > 0}}" class="alarm-strip row" bindtap="onAlarm"><view><text class="alarm-strip-icon">!</text><text>{{pendingCount}} 条告警待处理</text><text class="small alarm-strip-sub">及时跟进现场异常</text></view><text>›</text></view>
+  <view wx:elif="{{!loading}}" class="calm-strip" bindtap="onAlarm"><text class="dot"></text>{{activeCount ? '仍有 ' + activeCount + ' 条告警处理中' : '暂无待处理告警'}}</view>
+  <view class="row section-head"><view class="section-title">现场设备<text class="section-count">{{list.length}}</text></view><button class="plain scan-button" bindtap="onScan"><text class="scan-icon">⌗</text> 扫码查看</button></view>
+  <view class="row area-row" bindtap="onSite"><text class="small muted">{{site}}</text><text class="small muted">切换区域⌄</text></view>
+  <view class="search"><view class="search-symbol"></view><input placeholder="搜索设备名称、编号或位置" value="{{keyword}}" bindinput="onSearch" /></view>
+  <view class="filters"><view wx:for="{{filters}}" wx:key="key" class="filter {{filter === item.key ? 'active' : ''}}" data-key="{{item.key}}" bindtap="onFilterTap">{{item.label}}</view></view>
+  <view wx:if="{{error}}" class="error-banner">{{error}}<button class="plain" bindtap="onRetry">重新加载 ›</button></view>
+  <view wx:if="{{loading && !devices.length}}"><view wx:for="{{[1,2,3]}}" wx:key="*this" class="card skeleton"><view class="skeleton-line"></view><view class="skeleton-line short"></view></view></view>
+  <view wx:elif="{{!list.length && !error}}" class="card empty"><view class="empty-symbol">◫</view><view class="empty-title">{{devices.length ? '没有匹配的设备' : '尚未接入设备'}}</view><view class="small muted">{{devices.length ? '试试其他名称、区域或状态' : '连接现场数据后，设备会显示在这里'}}</view><button class="secondary" bindtap="onSettings">查看数据连接</button></view>
+  <view wx:for="{{list}}" wx:key="deviceId" class="card device-card" data-id="{{item.deviceId}}" bindtap="onDeviceTap">
+    <view class="row"><view class="left grow"><view class="device-icon {{item.type}}">{{item.type === 'power' ? 'ϟ' : item.type === 'sensor' ? '◉' : item.type === 'fan' ? '✣' : '◫'}}</view><view class="grow"><view class="device-name truncate">{{item.name}}</view><view class="small muted device-location">{{item.site}}</view></view></view><text class="badge {{item.status}}"><text class="dot {{item.status}}"></text>{{item.statusText}}</text></view>
+    <view wx:if="{{item.metricsView.length}}" class="device-metrics"><view wx:for="{{item.metricsView}}" wx:for-item="metric" wx:key="key" class="device-metric"><view class="metric-label">{{metric.label}}</view><text class="metric-value">{{metric.value}}</text><text class="metric-unit">{{metric.unit}}</text></view></view>
+    <view wx:else class="offline-note">暂无有效实时数据，请检查设备与采集网关</view>
+    <view class="row device-foot"><text>{{item.deviceId}}</text><text>{{item.snapshotOnly ? '快照' : '上报'}} {{item.lastReportText}} <text class="chevron">›</text></text></view>
+  </view>
+  <view class="footer-note">EzDAQ EPS · 让每一次巡检有据可查</view>
+</view>

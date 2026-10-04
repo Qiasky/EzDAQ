@@ -1,0 +1,119 @@
+[
+  {
+    "_id": "seed_dev001",
+    "deviceId": "DEV001",
+    "name": "1# 循环水泵",
+    "type": "pump",
+    "model": "CDLF32-50",
+    "vendor": "南方泵业",
+    "site": "东侧循环水站",
+    "installDate": 1620000000000,
+    "secret": "test-secret-dev001",
+    "enabled": true,
+    "maintainFlag": false,
+    "source": "modbus",
+    "status": "normal",
+    "metrics": {
+      "vibration": 2.1,
+      "temp": 52,
+      "current": 62,
+      "pressure": 0.004,
+      "rpm": 2950
+    },
+    "lastReportTime": 1759000000000,
+    "createdAt": 1620000000000
+  },
+  {
+    "_id": "seed_dev002",
+    "deviceId": "DEV002",
+    "name": "2# 送风机",
+    "type": "fan",
+    "model": "GYF-6-2",
+    "vendor": "亿利达",
+    "site": "屋顶风机房",
+    "installDate": 1620000000000,
+    "secret": "test-secret-dev002",
+    "enabled": true,
+    "maintainFlag": false,
+    "source": "modbus",
+    "status": "normal",
+    "metrics": {
+      "vibration": 1.8,
+      "temp": 48,
+      "current": 45,
+      "pressure": 0.002,
+      "rpm": 1450
+    },
+    "lastReportTime": 1759000000000,
+    "createdAt": 1620000000000
+  },
+  {
+    "_id": "seed_dev003",
+    "deviceId": "DEV003",
+    "name": "真空机组 A",
+    "type": "vacuum",
+    "model": "ZJ-600",
+    "vendor": "汉钟",
+    "site": "真空室下层",
+    "installDate": 1620000000000,
+    "secret": "test-secret-dev003",
+    "enabled": true,
+    "maintainFlag": false,
+    "source": "opcua",
+    "status": "normal",
+    "metrics": {
+      "vibration": 1.2,
+      "temp": 45,
+      "current": 38,
+      "pressure": 0.001,
+      "rpm": 900
+    },
+    "lastReportTime": 1759000000000,
+    "createdAt": 1620000000000
+  },
+  {
+    "_id": "seed_dev004",
+    "deviceId": "DEV004",
+    "name": "1# 冷却塔风机",
+    "type": "fan",
+    "model": "LBC-300",
+    "vendor": "良机",
+    "site": "厂区北侧冷却塔",
+    "installDate": 1620000000000,
+    "secret": "test-secret-dev004",
+    "enabled": true,
+    "maintainFlag": false,
+    "source": "modbus",
+    "status": "normal",
+    "metrics": {
+      "vibration": 1.5,
+      "temp": 46,
+      "current": 40,
+      "pressure": 0.002,
+      "rpm": 720
+    },
+    "lastReportTime": 1759000000000,
+    "createdAt": 1620000000000
+  },
+  {
+    "_id": "seed_dev005",
+    "deviceId": "DEV005",
+    "name": "配电柜进线柜",
+    "type": "power",
+    "model": "GCK-400",
+    "vendor": "施耐德",
+    "site": "高低压配电室",
+    "installDate": 1620000000000,
+    "secret": "test-secret-dev005",
+    "enabled": true,
+    "maintainFlag": false,
+    "source": "modbus",
+    "status": "normal",
+    "metrics": {
+      "voltage": 388,
+      "current": 120
+    },
+    "lastReportTime": 1759000000000,
+    "createdAt": 1620000000000
+  }
+]
