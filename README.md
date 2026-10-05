@@ -11,6 +11,7 @@ EzDAQ 是面向机房与现场设备的数据采集、状态监控和巡检项�
 | 入口 | 用途 |
 | --- | --- |
 | [项目简介](docs/EzDAQ项目简介.md) | 项目定位、现有功能和技术组成 |
+| [商用架构与实施计划](docs/EzDAQ商用架构与实施计划.md) | 能力缺口、SaaS/独立部署、数据库与存储、12 周实施和商用验收 |
 | [XPort 驱动详细使用说明](docs/XPort韩感温湿度传感器驱动使用说明.md) | 接线、查找 / 改 IP、参数、HEX 解读及微信上云 |
 | [XPort Windows 程序](apps/xport-tool/bin/XPort温湿度工具.exe) | 下载后直接运行，无需安装 Python |
 | [微信小程序](apps/wechat-miniprogram/README.md) | 开发者工具导入与功能说明 |
